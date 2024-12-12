@@ -56,7 +56,6 @@
             inputsFrom = [
               self.packages.${system}.default
             ];
-            shellHook = "exec $SHELL";
           };
         }
       );

@@ -44,7 +44,6 @@
             nativeBuildInputs = with pkgs; [
               odin
             ];
-            shellHook = "exec $SHELL";
           };
         }
       );
