@@ -7,7 +7,7 @@
 let
   version = lib.trim (lib.readFile ../VERSION);
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "foobar";
   inherit version;
   src = lib.cleanSource ./..;
@@ -20,20 +20,12 @@ stdenv.mkDerivation rec {
 
   ];
 
-  buildPhase = ''
-    runHook preBuild
+  makeFlags = [
+    (if debug then "debug" else "release")
+  ];
 
-    make ${if debug then "debug" else "release"}
-
-    runHook postBuild
-  '';
-
-  installPhase = ''
-    runHook preInstall
-
-    install -Dm755 build/${pname} -t $out/bin
-
-    runHook postInstall
-  '';
-
+  installFlags = [
+    "install"
+    "PREFIX=$(out)"
+  ];
 }

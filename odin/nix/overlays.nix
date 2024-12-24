@@ -1,6 +1,6 @@
 { self, lib, inputs }: {
-  default = final: prev: rec {
+  default = final: prev: {
     foobar = final.callPackage ./default.nix { };
-    foobar-debug = foobar.override { debug = true; };
+    foobar-debug = final.callPackage ./default.nix { debug = true; };
   };
 }
