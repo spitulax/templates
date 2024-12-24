@@ -3,15 +3,7 @@
 , debug ? false
 }:
 let
-  version = with lib; elemAt
-    (pipe (readFile ../Cargo.toml) [
-      (splitString "\n")
-      (filter (hasPrefix "version = "))
-      head
-      (splitString " = ")
-      last
-      (splitString "\"")
-    ]) 1;
+  version = lib.trim (lib.readFile ../VERSION);
 in
 rustPlatform.buildRustPackage ({
   pname = "foobar";

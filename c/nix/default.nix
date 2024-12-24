@@ -7,15 +7,7 @@
 , debug ? false
 }:
 let
-  version = with lib; elemAt
-    (pipe (readFile ../meson.build) [
-      (splitString "\n")
-      (filter (hasPrefix "  version : "))
-      head
-      (splitString " : ")
-      last
-      (splitString "'")
-    ]) 1;
+  version = lib.trim (lib.readFile ../VERSION);
 in
 stdenv.mkDerivation {
   pname = "foobar";
