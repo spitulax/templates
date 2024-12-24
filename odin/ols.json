@@ -21,6 +21,9 @@
 
   "profile": "default",
   "profiles": [
-    { "name": "default", "os": "linux", "checker_path": ["src"] }
+    { "name": "default", "checker_path": ["src"] },
+    { "name": "linux", "os": "linux", "checker_path": ["src"] },
+    { "name": "windows", "os": "windows", "checker_path": ["src"] },
+    { "name": "darwin", "os": "darwin", "checker_path": ["src"] }
   ]
 }

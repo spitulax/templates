@@ -5,14 +5,7 @@
 , debug ? false
 }:
 let
-  version = with lib;
-    (pipe (readFile ../Makefile) [
-      (splitString "\n")
-      (filter (hasPrefix "PROG_VERSION := "))
-      head
-      (splitString "PROG_VERSION := ")
-      last
-    ]);
+  version = lib.trim (lib.readFile ../VERSION);
 in
 stdenv.mkDerivation rec {
   pname = "foobar";
