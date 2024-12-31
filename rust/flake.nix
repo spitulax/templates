@@ -11,6 +11,8 @@
 
   outputs = { self, nixpkgs, rust-overlay, ... }@inputs:
     let
+      toolchain-channel = "beta";
+
       inherit (nixpkgs) lib;
       systems = [ "x86_64-linux" "aarch64-linux" ];
       eachSystem = f: lib.genAttrs systems f;
@@ -30,7 +32,7 @@
         });
     in
     {
-      rustToolchain = eachSystem (system: pkgsFor.${system}.rust-bin.stable.latest.default);
+      rustToolchain = eachSystem (system: inputs.rust-overlay.packages.${system}."rust-${toolchain-channel}");
 
       overlays = import ./nix/overlays.nix { inherit self lib inputs; };
 
