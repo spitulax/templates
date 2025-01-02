@@ -3,7 +3,7 @@
 , debug ? false
 }:
 let
-  version = (lib.importTOML ../Cargo.toml).package.version;
+  inherit ((lib.importTOML ../Cargo.toml).package) version;
 in
 rustPlatform.buildRustPackage ({
   pname = "fooname";
