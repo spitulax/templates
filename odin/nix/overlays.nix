@@ -1,6 +1,6 @@
 { self, lib, inputs }: {
   default = final: prev: {
-    foobar = final.callPackage ./default.nix { };
-    foobar-debug = final.callPackage ./default.nix { debug = true; };
+    fooname = final.callPackage ./default.nix { };
+    fooname-debug = final.callPackage ./default.nix { debug = true; };
   };
 }

@@ -1,5 +1,5 @@
 project(
-  'foobar',
+  'fooname',
   'c', 'cpp',
   version : run_command('cat', join_paths(meson.project_source_root(), 'VERSION'), check: true).stdout().strip(),
   # license: 'MIT',
@@ -29,7 +29,7 @@ include = [
 ]
 
 executable(
-  'foobar',
+  'fooname',
   src,
   include_directories : include,
   install : true,

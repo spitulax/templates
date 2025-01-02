@@ -1,5 +1,5 @@
 { self, lib, inputs }: {
   default = final: prev: {
-    foobar = final.callPackage ./default.nix { };
+    fooname = final.callPackage ./default.nix { };
   };
 }

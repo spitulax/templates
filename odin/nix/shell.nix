@@ -2,12 +2,11 @@
 , self
 , pkgs
 , mkShell
-, rustToolchain
 }:
 mkShell {
   name = lib.getName self.packages.${pkgs.system}.default + "-shell";
-  nativeBuildInputs = [
-    rustToolchain
+  nativeBuildInputs = with pkgs; [
+    odin
   ];
   inputsFrom = [
     self.packages.${pkgs.system}.default

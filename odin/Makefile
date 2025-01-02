@@ -1,7 +1,7 @@
 PREFIX ?= $(HOME)/.local
 BIN_DIR := $(PREFIX)/bin
 
-PROG_NAME := foobar
+PROG_NAME := fooname
 PROG_VERSION := $(shell cat ./VERSION | tr -d '[:space:]')
 
 SRC_DIR := ./src

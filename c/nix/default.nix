@@ -10,7 +10,7 @@ let
   version = lib.trim (lib.readFile ../VERSION);
 in
 stdenv.mkDerivation {
-  pname = "foobar";
+  pname = "fooname";
   inherit version;
   src = lib.cleanSource ./..;
 
@@ -25,4 +25,12 @@ stdenv.mkDerivation {
   ];
 
   mesonBuildType = if debug then "debug" else "release";
+
+  meta = {
+    description = "foodesc";
+    mainProgram = "fooname";
+    homepage = "https://github.com/spitulax/fooname";
+    # license = lib.licenses.;
+    # platforms = lib.platforms.;
+  };
 }

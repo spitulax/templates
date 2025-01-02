@@ -1,5 +1,5 @@
 {
-  description = "A project";
+  description = "foodesc";
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -24,8 +24,8 @@
           pkgs = pkgsFor.${system};
         in
         {
-          default = self.packages.${system}.foobar;
-          inherit (pkgs) foobar;
+          default = self.packages.${system}.fooname;
+          inherit (pkgs) fooname;
         });
 
       devShells = eachSystem (system:
@@ -33,12 +33,7 @@
           pkgs = pkgsFor.${system};
         in
         {
-          default = pkgs.mkShell {
-            name = lib.getName self.packages.${system}.default + "-shell";
-            inputsFrom = [
-              self.packages.${system}.default
-            ];
-          };
+          default = pkgs.callPackage ./nix/shell.nix { inherit self; };
         }
       );
     };
