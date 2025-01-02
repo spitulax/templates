@@ -6,13 +6,21 @@ let
   version = (lib.importTOML ../Cargo.toml).package.version;
 in
 rustPlatform.buildRustPackage ({
-  pname = "foobar";
+  pname = "fooname";
   inherit version;
   src = lib.cleanSource ./..;
 
   cargoLock = {
     lockFile = ../Cargo.lock;
     allowBuiltinFetchGit = true;
+  };
+
+  meta = {
+    description = "foodesc";
+    mainProgram = "fooname";
+    homepage = "https://github.com/spitulax/fooname";
+    # license = lib.licenses.;
+    # platforms = lib.platforms.;
   };
 } // (
   if debug then {

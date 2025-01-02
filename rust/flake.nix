@@ -1,5 +1,5 @@
 {
-  description = "A project";
+  description = "foodesc";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -50,8 +50,8 @@
           pkgs = pkgsFor.${system};
         in
         {
-          default = self.packages.${system}.foobar;
-          inherit (pkgs) foobar foobar-debug;
+          default = self.packages.${system}.fooname;
+          inherit (pkgs) fooname fooname-debug;
         });
 
       devShells = eachSystem (system:

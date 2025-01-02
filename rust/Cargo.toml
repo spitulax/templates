@@ -1,6 +1,14 @@
 [package]
 name = "foobar"
 version = "0.0.0"
+authors = [ "spitulax" ]
 edition = "2021"
+description = "foodesc"
+readme = "README.md"
+homepage = "https://github.com/spitulax/fooname"
+repository = "https://github.com/spitulax/fooname"
+# license = "MIT"
+keywords = []
+categories = [] # https://crates.io/category_slugs
 
 [dependencies]
