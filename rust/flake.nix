@@ -16,24 +16,33 @@
       inherit (nixpkgs) lib;
       systems = [ "x86_64-linux" "aarch64-linux" ];
       eachSystem = f: lib.genAttrs systems f;
-      pkgsFor = eachSystem (system:
-        import nixpkgs {
-          inherit system;
-          overlays = [
-            self.overlays.default
-            rust-overlay.overlays.default
-            (final: _: {
-              rustPlatform = final.makeRustPlatform {
-                cargo = self.rustToolchain.${final.system};
-                rustc = self.rustToolchain.${final.system};
-              };
-            })
-          ];
-        });
+      pkgsFor = eachSystem
+        (system:
+          let
+            rustPkgs = import nixpkgs {
+              inherit system;
+              overlays = [
+                rust-overlay.overlays.default
+              ];
+            };
+            inherit (rustPkgs) rust-bin;
+          in
+          import nixpkgs {
+            inherit system;
+            overlays = [
+              self.overlays.default
+              (final: prev:
+                {
+                  rustToolchain = rust-bin.${toolchain-channel}.latest.minimal;
+                  rustPlatform = prev.makeRustPlatform {
+                    cargo = final.rustToolchain;
+                    rustc = final.rustToolchain;
+                  };
+                })
+            ];
+          });
     in
     {
-      rustToolchain = eachSystem (system: inputs.rust-overlay.packages.${system}."rust-${toolchain-channel}");
-
       overlays = import ./nix/overlays.nix { inherit self lib inputs; };
 
       packages = eachSystem (system:
@@ -50,15 +59,7 @@
           pkgs = pkgsFor.${system};
         in
         {
-          default = pkgs.mkShell {
-            name = lib.getName self.packages.${system}.default + "-shell";
-            nativeBuildInputs = with pkgs; [
-              self.rustToolchain.${system}
-            ];
-            inputsFrom = [
-              self.packages.${system}.default
-            ];
-          };
+          default = pkgs.callPackage ./nix/shell.nix { inherit self; };
         }
       );
     };

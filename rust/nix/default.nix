@@ -3,10 +3,7 @@
 , debug ? false
 }:
 let
-  version = lib.pipe (lib.readFile ../Cargo.toml) [
-    (lib.match "^.*\nversion = \"([0-9]+\.[0-9]+\.[0-9]+)\".*$")
-    lib.head
-  ];
+  version = (lib.importTOML ../Cargo.toml).package.version;
 in
 rustPlatform.buildRustPackage ({
   pname = "foobar";
