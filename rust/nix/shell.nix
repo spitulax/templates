@@ -1,12 +1,12 @@
 { self
 , pkgs
 , mkShell
-, rustToolchain
+, rust-bin
 }:
 mkShell {
   name = "fooname-shell";
   nativeBuildInputs = [
-    rustToolchain
+    rust-bin.latest.default
   ];
   inputsFrom = [
     self.packages.${pkgs.system}.default

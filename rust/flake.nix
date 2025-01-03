@@ -11,7 +11,7 @@
 
   outputs = { self, nixpkgs, rust-overlay, ... }@inputs:
     let
-      toolchain-channel = "beta";
+      toolchain-channel = "stable";
 
       inherit (nixpkgs) lib;
       systems = [ "x86_64-linux" "aarch64-linux" ];
@@ -33,11 +33,15 @@
               self.overlays.default
               (final: prev:
                 {
-                  rustToolchain = rust-bin.${toolchain-channel}.latest.minimal;
-                  rustPlatform = prev.makeRustPlatform {
-                    cargo = final.rustToolchain;
-                    rustc = final.rustToolchain;
-                  };
+                  rust-bin = rust-bin.${toolchain-channel};
+                  rustPlatform =
+                    let
+                      toolchain = final.rust-bin.latest.minimal;
+                    in
+                    prev.makeRustPlatform {
+                      cargo = toolchain;
+                      rustc = toolchain;
+                    };
                 })
             ];
           });
