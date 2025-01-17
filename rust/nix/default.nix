@@ -1,10 +1,9 @@
 { lib
 , rustPlatform
+
+, version ? "git"
 , debug ? false
 }:
-let
-  inherit ((lib.importTOML ../Cargo.toml).package) version;
-in
 rustPlatform.buildRustPackage ({
   pname = "fooname";
   inherit version;

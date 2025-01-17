@@ -1,4 +1,5 @@
-{ _ }: {
+{ version ? "git"
+}: {
   meta = {
     description = "foodesc";
     mainProgram = "fooname";
