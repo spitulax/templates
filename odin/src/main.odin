@@ -5,11 +5,10 @@ import "core:mem"
 import "core:os"
 _ :: mem
 
-PROG_NAME :: #config(PROG_NAME, "")
 PROG_VERSION :: #config(PROG_VERSION, "")
 
 start :: proc() -> (ok: bool) {
-    fmt.printfln("Hello, ODIN! %s version %s", PROG_NAME, PROG_VERSION)
+    fmt.printfln("Hello, ODIN! fooname version %s", PROG_VERSION)
     return true
 }
 
