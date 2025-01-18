@@ -1,7 +1,7 @@
 project(
   'fooname',
   'c', 'cpp',
-  version : run_command('cat', join_paths(meson.project_source_root(), 'VERSION'), check: true).stdout().strip(),
+  version : run_command('cat', meson.project_source_root() / 'VERSION', check: true).stdout().strip(),
   # license: 'MIT',
   default_options : [
     'c_std=c11',
