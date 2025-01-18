@@ -3,8 +3,8 @@
 , meson
 , ninja
 , pkg-config
-
 , version ? "git"
+
 , debug ? false
 }:
 stdenv.mkDerivation {

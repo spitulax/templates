@@ -1,7 +1,7 @@
 { lib
 , rustPlatform
-
 , version ? "git"
+
 , debug ? false
 }:
 rustPlatform.buildRustPackage ({

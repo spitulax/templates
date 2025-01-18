@@ -1,8 +1,8 @@
 { stdenv
 , lib
 , odin
-
 , version ? "git"
+
 , debug ? false
 }:
 stdenv.mkDerivation {
