@@ -12,6 +12,6 @@ let
 in
 {
   default = final: prev: {
-    fooname = final.callPackage ./default.nix { inherit version; };
+    fooname = prev.callPackage ./default.nix { inherit version; };
   };
 }

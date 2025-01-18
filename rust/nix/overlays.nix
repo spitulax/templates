@@ -12,7 +12,7 @@ let
 in
 {
   default = final: prev: {
-    fooname = final.callPackage ./default.nix { inherit version; };
-    fooname-debug = final.callPackage ./default.nix { inherit version; debug = true; };
+    fooname = prev.callPackage ./default.nix { inherit version; };
+    fooname-debug = prev.callPackage ./default.nix { inherit version; debug = true; };
   };
 }
