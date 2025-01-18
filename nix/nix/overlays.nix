@@ -11,7 +11,9 @@ let
     + "_" + (self.shortRev or "dirty");
 in
 {
-  default = final: prev: {
+  default = self.overlays.fooname;
+
+  fooname = final: prev: {
     fooname = prev.callPackage ./default.nix { inherit version; };
   };
 }
