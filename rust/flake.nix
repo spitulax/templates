@@ -30,7 +30,6 @@
           import nixpkgs {
             inherit system;
             overlays = [
-              self.overlays.default
               (final: prev:
                 {
                   rust-bin = rust-bin.${toolchain-channel};
@@ -43,6 +42,7 @@
                       rustc = toolchain;
                     };
                 })
+              self.overlays.default
             ];
           });
     in
