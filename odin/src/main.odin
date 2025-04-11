@@ -14,7 +14,9 @@ start :: proc() -> (ok: bool) {
 
 main :: proc() {
     ok: bool
-    defer os.exit(!ok)
+    defer if !ok {
+        os.exit(1)
+    }
     defer free_all(context.temp_allocator)
     when ODIN_DEBUG {
         mem_track: mem.Tracking_Allocator
