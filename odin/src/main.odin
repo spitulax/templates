@@ -6,8 +6,13 @@ import "core:os"
 _ :: mem
 
 PROG_VERSION :: #config(PROG_VERSION, "")
+Args :: struct {
+	write: Maybe(bool) `flag:"w" usage:"write the new format to file"`,
+	stdin: Maybe(bool) `flag:"stdin" usage:"formats code from standard input"`,
+}
 
 start :: proc() -> (ok: bool) {
+    fmt.println(size_of(Args));
     fmt.printfln("Hello, ODIN! fooname version %s", PROG_VERSION)
     return true
 }

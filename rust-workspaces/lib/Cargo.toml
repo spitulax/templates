@@ -1,0 +1,15 @@
+[package]
+name = "lib"
+description.workspace = true
+edition.workspace = true
+authors.workspace = true
+readme.workspace = true
+version.workspace = true
+homepage.workspace = true
+repository.workspace = true
+license.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+workspace-hack = { version = "0.1", path = "../workspace-hack" }

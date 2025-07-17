@@ -1,8 +1,14 @@
-[package]
+[workspace]
+resolver = "3"
+members = [ "fooname", "lib", "workspace-hack" ]
+
+[workspace.metadata.crane]
 name = "fooname"
+
+[workspace.package]
 version = "0.0.0"
+edition = "2024"
 authors = [ "spitulax" ]
-edition = "2021"
 description = "foodesc"
 readme = "README.md"
 homepage = "https://github.com/spitulax/fooname"
@@ -11,4 +17,4 @@ license = "MIT"
 keywords = [ ]
 categories = [ ] # https://crates.io/category_slugs
 
-[dependencies]
+[workspace.dependencies]

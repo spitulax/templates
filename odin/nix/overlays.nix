@@ -1,20 +1,22 @@
-{ self, lib, inputs }:
-let
-  mkDate = longDate: (lib.concatStringsSep "-" [
-    (builtins.substring 0 4 longDate)
-    (builtins.substring 4 2 longDate)
-    (builtins.substring 6 2 longDate)
-  ]);
-
-  version = lib.trim (lib.readFile ../VERSION)
-    + "+date=" + (mkDate (self.lastModifiedDate or "19700101"))
-    + "_" + (self.shortRev or "dirty");
-in
+{ self
+, lib
+, mypkgs
+}:
 {
   default = self.overlays.fooname;
 
   fooname = final: prev: {
-    fooname = prev.callPackage ./default.nix { inherit version; };
-    fooname-debug = prev.callPackage ./default.nix { inherit version; debug = true; };
+    fooname = prev.callPackage ./default.nix { inherit (prev.myLib) version; };
+  };
+
+  libs = final: prev: {
+    myLib = import ./lib.nix { inherit self lib; };
+  };
+
+  odin = final: prev: rec {
+    inherit (prev.mypkgs) odin-git odin-doc;
+    ols = prev.mypkgs.ols.override {
+      odinRoot = "${odin-git}/share";
+    };
   };
 }

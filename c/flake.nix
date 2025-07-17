@@ -3,7 +3,7 @@
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, ... }:
     let
       inherit (nixpkgs) lib;
       systems = [ "x86_64-linux" "aarch64-linux" ];
@@ -12,12 +12,13 @@
         import nixpkgs {
           inherit system;
           overlays = [
+            self.overlays.libs
             self.overlays.default
           ];
         });
     in
     {
-      overlays = import ./nix/overlays.nix { inherit self lib inputs; };
+      overlays = import ./nix/overlays.nix { inherit self lib; };
 
       packages = eachSystem (system:
         let
@@ -25,7 +26,7 @@
         in
         {
           default = self.packages.${system}.fooname;
-          inherit (pkgs) fooname fooname-debug;
+          inherit (pkgs) fooname;
         });
 
       devShells = eachSystem (system:

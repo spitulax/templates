@@ -69,6 +69,23 @@
               cargoNextestPartitionsExtraArgs = "--no-tests=pass";
             }
           );
+
+          hakari = craneLib.mkCargoDerivation {
+            inherit (myLib) src;
+            pname = "fooname-hakari";
+            cargoArtifacts = null;
+            doInstallCargoArtifacts = false;
+
+            buildPhaseCargoCommand = ''
+              cargo hakari generate --diff
+              cargo hakari manage-deps --dry-run
+              cargo hakari verify
+            '';
+
+            nativeBuildInputs = [
+              pkgs.cargo-hakari
+            ];
+          };
         }
       );
     };

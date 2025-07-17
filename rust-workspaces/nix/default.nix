@@ -4,6 +4,7 @@
 {
   fooname = myLib.mkCrate {
     pname = "fooname";
+    crateSrc = ../fooname;
 
     meta = {
       description = "foodesc";

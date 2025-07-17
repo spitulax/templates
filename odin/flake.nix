@@ -6,7 +6,7 @@
     mypkgs.url = "github:spitulax/mypkgs";
   };
 
-  outputs = { self, nixpkgs, mypkgs, ... }@inputs:
+  outputs = { self, nixpkgs, mypkgs, ... }:
     let
       inherit (nixpkgs) lib;
       systems = [ "x86_64-linux" "aarch64-linux" ];
@@ -15,15 +15,15 @@
         import nixpkgs {
           inherit system;
           overlays = [
-            (final: prev: {
-              inherit (mypkgs.packages.${final.system}) odin;
-            })
+            mypkgs.overlays.default
+            self.overlays.libs
+            self.overlays.odin
             self.overlays.default
           ];
         });
     in
     {
-      overlays = import ./nix/overlays.nix { inherit self lib inputs; };
+      overlays = import ./nix/overlays.nix { inherit self lib mypkgs; };
 
       packages = eachSystem (system:
         let
@@ -31,7 +31,7 @@
         in
         {
           default = self.packages.${system}.fooname;
-          inherit (pkgs) fooname fooname-debug;
+          inherit (pkgs) fooname;
         });
 
       devShells = eachSystem (system:

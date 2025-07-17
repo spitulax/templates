@@ -4,8 +4,6 @@
 , ninja
 , pkg-config
 , version ? "git"
-
-, debug ? false
 }:
 stdenv.mkDerivation {
   pname = "fooname";
@@ -22,7 +20,7 @@ stdenv.mkDerivation {
 
   ];
 
-  mesonBuildType = if debug then "debug" else "release";
+  mesonBuildType = "release";
 
   meta = {
     description = "foodesc";
