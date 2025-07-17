@@ -1,8 +1,9 @@
 { pkgs
 , myLib
-, cargo-hakari
 , craneLib
 , rust-analyzer
+, cargo-hakari
+, cargo-nextest
 }:
 craneLib.devShell {
   name = "fooname-shell";
@@ -10,6 +11,7 @@ craneLib.devShell {
     (myLib.rustToolchain pkgs)
     rust-analyzer
     cargo-hakari
+    cargo-nextest
   ];
   inputsFrom = [
     (myLib.cargoArtifacts.overrideAttrs {
