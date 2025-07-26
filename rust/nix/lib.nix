@@ -14,7 +14,7 @@ rec {
     (builtins.substring 6 2 longDate)
   ]);
 
-  src = craneLib.cleanCargoSource ./..;
+  src = lib.cleanSource ./..;
 
   version = src: (craneLib.crateNameFromCargoToml { inherit src; }).version
     + "+date=" + (mkDate (self.lastModifiedDate or "19700101"))
