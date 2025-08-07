@@ -2,7 +2,6 @@
 , myLib
 , craneLib
 , rust-analyzer
-, cargo-hakari
 , cargo-nextest
 }:
 craneLib.devShell {
@@ -10,7 +9,6 @@ craneLib.devShell {
   buildInputs = [
     (myLib.rustToolchain pkgs)
     rust-analyzer
-    cargo-hakari
     cargo-nextest
   ];
   inputsFrom = [
