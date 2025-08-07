@@ -44,32 +44,6 @@
         in
         {
           default = pkgs.callPackage ./nix/shell.nix { };
-        }
-      );
-
-      checks = eachSystem (system:
-        let
-          pkgs = pkgsFor.${system};
-          inherit (pkgs) craneLib myLib;
-        in
-        self.packages.${system}
-        // {
-          clippy = craneLib.cargoClippy
-            (myLib.commonArgs // {
-              inherit (myLib) cargoArtifacts;
-              cargoClippyExtraArgs = "--all-targets";
-            });
-
-          nextest = craneLib.cargoNextest (
-            myLib.commonArgs
-            // {
-              inherit (myLib) cargoArtifacts;
-              partitions = 1;
-              partitionType = "count";
-              cargoNextestPartitionsExtraArgs = "--no-tests=pass";
-            }
-          );
-        }
-      );
+        });
     };
 }

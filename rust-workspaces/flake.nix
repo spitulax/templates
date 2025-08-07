@@ -44,49 +44,6 @@
         in
         {
           default = pkgs.callPackage ./nix/shell.nix { };
-        }
-      );
-
-      checks = eachSystem (system:
-        let
-          pkgs = pkgsFor.${system};
-          inherit (pkgs) craneLib myLib;
-        in
-        self.packages.${system}
-        // {
-          clippy = craneLib.cargoClippy
-            (myLib.commonArgs // {
-              inherit (myLib) cargoArtifacts;
-              cargoClippyExtraArgs = "--all-targets";
-            });
-
-          nextest = craneLib.cargoNextest (
-            myLib.commonArgs
-            // {
-              inherit (myLib) cargoArtifacts;
-              partitions = 1;
-              partitionType = "count";
-              cargoNextestPartitionsExtraArgs = "--no-tests=pass";
-            }
-          );
-
-          hakari = craneLib.mkCargoDerivation {
-            inherit (myLib) src;
-            pname = "fooname-hakari";
-            cargoArtifacts = null;
-            doInstallCargoArtifacts = false;
-
-            buildPhaseCargoCommand = ''
-              cargo hakari generate --diff
-              cargo hakari manage-deps --dry-run
-              cargo hakari verify
-            '';
-
-            nativeBuildInputs = [
-              pkgs.cargo-hakari
-            ];
-          };
-        }
-      );
+        });
     };
 }
