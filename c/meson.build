@@ -4,8 +4,8 @@ project(
   version : run_command('cat', meson.project_source_root() / 'VERSION', check: true).stdout().strip(),
   # license: 'MIT',
   default_options : [
-    'c_std=c11',
-    'cpp_std=c++11',
+    'c_std=c23',
+    'cpp_std=c++23',
     'warning_level=3',
   ],
 )
@@ -21,15 +21,16 @@ add_project_arguments('-DPROG_VERSION="' + meson.project_version() + '"', langua
 add_project_arguments(['-Wconversion', '-Wsign-conversion', '-Wpedantic'], language: ['c', 'cpp'])
 add_project_arguments(['-Wshadow', '-Wnon-virtual-dtor'], language: 'cpp')
 
-subdir('src')
+src = [ ]
+includes = [ ]
+dependencies = [ ]
 
-include = [
-  'src',
-]
+subdir('src')
 
 executable(
   'fooname',
   src,
-  include_directories : include,
+  include_directories : includes,
+  dependencies : dependencies,
   install : true,
 )
