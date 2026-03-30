@@ -5,6 +5,6 @@
 mkShell {
   name = "fooname-shell";
   inputsFrom = [
-    self.packages.${pkgs.system}.default
+    self.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }
