@@ -1,4 +1,5 @@
-{ mkShell
+{ self
+, mkShell
 }:
 mkShell {
   name = "fooname-shell";
