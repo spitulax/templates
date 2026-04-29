@@ -11,7 +11,7 @@ project(
 )
 
 cc = meson.get_compiler('c')
-cxx = meson.get_compiler('cpp')
+cpp = meson.get_compiler('cpp')
 
 if get_option('buildtype').startswith('debug')
   add_project_arguments(['-Og', '-DDEBUG'], language: ['c', 'cpp'])
