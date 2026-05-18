@@ -24,9 +24,8 @@ if get_option('buildtype').startswith('debug')
 endif
 
 add_project_arguments('-DPROG_VERSION="' + meson.project_version() + '"', language: ['c', 'cpp'])
-
-add_project_arguments(['-Wconversion', '-Wsign-conversion', '-Wpedantic'], language: ['c', 'cpp'])
-add_project_arguments(['-Wshadow', '-Wnon-virtual-dtor'], language: 'cpp')
+add_project_arguments(['-Wconversion', '-Wsign-conversion', '-Wshadow'], language: ['c', 'cpp'])
+add_project_arguments(['-Wnon-virtual-dtor'], language: 'cpp')
 
 if cc.get_id() == 'clang-cl'
   clang_cl_common = []

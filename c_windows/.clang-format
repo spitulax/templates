@@ -45,7 +45,7 @@ BitFieldColonSpacing: Both
 BreakAdjacentStringLiterals: false
 BreakAfterAttributes: Leave
 BreakAfterReturnType: Automatic
-BreakBeforeBinaryOperators: None
+BreakBeforeBinaryOperators: true
 BreakBeforeBraces: Attach
 BreakBeforeConceptDeclarations: Allowed
 BreakBeforeInlineASMColon: OnlyMultiline
