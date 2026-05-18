@@ -1,7 +1,8 @@
 { self
 , pkgs
-, mkShell
+, clangStdenv
 , clang
+, mkShell
 , lld
 , xwin
 , libllvm
@@ -9,15 +10,26 @@
 , meson
 , ninja
 , pkg-config
+, overrideCC
+, symlinkJoin
 }:
-mkShell {
+let
+  clangFix = symlinkJoin {
+    name = "clang-fix";
+    paths = [
+      clang-tools
+      clang
+    ];
+  };
+in
+(mkShell.override {
+  stdenv = overrideCC clangStdenv clangFix;
+}) {
   name = "fooname-shell";
   buildInputs = [
-    clang
     lld
     xwin
     libllvm
-    clang-tools
     meson
     ninja
     pkg-config

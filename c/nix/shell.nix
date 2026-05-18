@@ -1,8 +1,6 @@
 { self
 , pkgs
 , mkShell
-, gcc
-, clang
 , clang-tools
 , meson
 , ninja
@@ -11,8 +9,6 @@
 mkShell {
   name = "fooname-shell";
   buildInputs = [
-    gcc
-    # clang
     clang-tools
     meson
     ninja

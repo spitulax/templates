@@ -1,11 +1,11 @@
-{ stdenv
+{ clangStdenv
 , lib
 , meson
 , ninja
 , pkg-config
 , version ? "git"
 }:
-stdenv.mkDerivation {
+clangStdenv.mkDerivation {
   pname = "fooname";
   inherit version;
   src = lib.cleanSource ./..;

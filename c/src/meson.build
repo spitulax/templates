@@ -1,5 +1,6 @@
 src += files(
   'main.c',
+  # 'main.cpp',
 )
 
 includes += [
