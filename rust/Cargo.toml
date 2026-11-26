@@ -5,7 +5,6 @@ authors = [ "spitulax" ]
 edition = "2021"
 description = "foodesc"
 readme = "README.md"
-homepage = "https://github.com/spitulax/fooname"
 repository = "https://github.com/spitulax/fooname"
 license = "MIT"
 keywords = [ ]
